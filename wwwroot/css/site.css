@@ -1,0 +1,275 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* FoodShare homepage */
+:root {
+    --fs-green: #287653;
+    --fs-dark: #173b2b;
+    --fs-light: #f5f8f3;
+    --fs-muted: #68766d;
+}
+
+.hero-section {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    padding: 72px 7%;
+    background: var(--fs-light);
+    border-radius: 20px;
+}
+
+.hero-tag,
+.section-heading > span {
+    color: var(--fs-green);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero-content h1 {
+    margin: 22px 0;
+    color: var(--fs-dark);
+    font-size: clamp(42px, 5vw, 66px);
+    font-weight: 750;
+    line-height: 1.08;
+}
+
+.hero-content h1 span {
+    color: var(--fs-green);
+}
+
+.hero-content > p,
+.section-heading > p {
+    color: var(--fs-muted);
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 480px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 28px 0;
+}
+
+.btn-primary-custom,
+.btn-secondary-custom {
+    display: inline-block;
+    padding: 13px 21px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-primary-custom {
+    color: white;
+    background: var(--fs-green);
+}
+
+.btn-primary-custom:hover {
+    color: white;
+    background: var(--fs-dark);
+}
+
+.btn-secondary-custom {
+    color: var(--fs-dark);
+    border: 1px solid #d6dfd6;
+    background: white;
+}
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 36px;
+}
+
+.hero-stats h3 {
+    color: var(--fs-dark);
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.hero-stats p {
+    color: var(--fs-muted);
+    font-size: 13px;
+    margin: 0;
+}
+
+.hero-visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 340px;
+}
+
+.food-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 340px;
+    padding: 28px;
+    background: white;
+    border: 1px solid #e8eee7;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px #173b2b12;
+}
+
+.food-icon {
+    display: grid;
+    place-items: center;
+    height: 130px;
+    margin-bottom: 24px;
+    border-radius: 14px;
+    background: #edf5e9;
+    font-size: 68px;
+}
+
+.available-label {
+    color: var(--fs-green);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.food-card h3 {
+    margin: 12px 0;
+    color: var(--fs-dark);
+    font-size: 23px;
+}
+
+.food-card p {
+    color: var(--fs-muted);
+    font-size: 14px;
+}
+
+.food-card-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid #edf0ec;
+    font-size: 12px;
+}
+
+.status-dot {
+    color: var(--fs-green);
+    font-weight: 600;
+}
+
+.decor {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border-radius: 28px;
+    background: #e0ebd9;
+    transform: rotate(18deg);
+}
+
+.decor-one {
+    top: 15px;
+    right: 0;
+}
+
+.decor-two {
+    bottom: 8px;
+    left: 0;
+    background: #e7eee2;
+}
+
+.how-section {
+    padding: 65px 4% 40px;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    margin: 12px 0;
+    color: var(--fs-dark);
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    padding: 25px;
+    border: 1px solid #e8eee7;
+    border-radius: 14px;
+    background: white;
+}
+
+.feature-number {
+    color: var(--fs-green);
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.feature-card h3 {
+    color: var(--fs-dark);
+    font-size: 20px;
+}
+
+.feature-card p {
+    color: var(--fs-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 42px 7%;
+    }
+
+    .hero-visual {
+        min-height: 300px;
+    }
+
+    .hero-stats {
+        gap: 20px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}

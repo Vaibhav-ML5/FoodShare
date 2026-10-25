@@ -1,0 +1,181 @@
+
+@model FoodShare.Models.Donation
+
+@{
+    ViewData["Title"] = "Donation Details";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <a asp-action="Index"
+               class="text-success text-decoration-none">
+                &larr; Back to donations
+            </a>
+
+            <div class="card border-0 shadow-sm rounded-4 mt-3">
+                <div class="card-body p-4 p-md-5">
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+                    <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
+                        <span class="badge bg-success-subtle text-success">
+                            @Model.FoodType
+                        </span>
+                        <span class="badge bg-light text-dark">
+                            @Model.Status
+                        </span>
+                    </div>
+
+                    <h1 class="fw-bold">@Model.Title</h1>
+
+                    <p class="text-muted mt-3">
+                        @(string.IsNullOrWhiteSpace(Model.Description)
+                            ? "No additional description provided."
+                            : Model.Description)
+                    </p>
+
+                    <hr class="my-4" />
+
+                    <h4 class="fw-bold mb-3">Donation information</h4>
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <p class="text-muted mb-1">Quantity</p>
+                            <h5>@Model.Quantity</h5>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <p class="text-muted mb-1">Donated by</p>
+                            <h5>@Model.DonorName</h5>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="text-muted mb-1">Pickup location</p>
+                            <h5>@Model.PickupLocation</h5>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <p class="text-muted mb-1">Contact number</p>
+                            <h5>@Model.ContactNumber</h5>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <p class="text-muted mb-1">Pickup deadline</p>
+                            <h5>
+                                @Model.PickupDeadline.ToString("dd MMM yyyy, hh:mm tt")
+                            </h5>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="text-muted mb-1">Posted on</p>
+                            <p>@Model.CreatedAt.ToString("dd MMM yyyy, hh:mm tt")</p>
+                        </div>
+                    </div>
+
+                    @if (Model.Status == "Available" &&
+                         Model.PickupDeadline > DateTime.Now)
+                    {
+                        <hr class="my-4" />
+
+                        <h4 class="fw-bold">Claim this donation</h4>
+                        <p class="text-muted">
+                            Enter your name to claim this food for pickup.
+                        </p>
+
+                        <form asp-action="Claim" method="post" class="mt-3">
+                            <input type="hidden" name="id" value="@Model.Id" />
+
+                            <label class="form-label" for="claimedBy">
+                                NGO / volunteer name
+                            </label>
+
+                            <input type="text"
+                                   name="claimedBy"
+                                   id="claimedBy"
+                                   class="form-control mb-3"
+                                   maxlength="100"
+                                   required
+                                   placeholder="Enter your name" />
+
+                            <button type="submit" class="btn btn-success w-100">
+                                Claim This Donation
+                            </button>
+                        </form>
+                    }
+                    else if (Model.Status == "Claimed")
+                    {
+                        <div class="alert alert-info mt-4">
+                            <strong>Claimed by:</strong> @Model.ClaimedBy
+                            <br />
+                            <strong>Claimed on:</strong>
+                            @Model.ClaimedAt?.ToString("dd MMM yyyy, hh:mm tt")
+                        </div>
+
+                        <form asp-action="Complete" method="post" class="mt-3">
+                            <input type="hidden" name="id" value="@Model.Id" />
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                Mark as Collected
+                            </button>
+                        </form>
+                    }
+                    else if (Model.Status == "Completed")
+                    {
+                        <div class="alert alert-success mt-4">
+                            This donation has been collected successfully.
+
+                            @if (Model.CompletedAt.HasValue)
+                            {
+                                <div>
+                                    Completed on:
+                                    @Model.CompletedAt.Value.ToString("dd MMM yyyy, hh:mm tt")
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary mt-4">
+                            This donation is no longer available for claiming.
+                        </div>
+                    }
+
+                    @if (Model.Status == "Available")
+                    {
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            <a asp-action="Edit"
+                               asp-route-id="@Model.Id"
+                               class="btn btn-outline-primary">
+                                Edit Donation
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@Model.Id"
+                               class="btn btn-outline-danger">
+                                Delete Donation
+                            </a>
+                        </div>
+                    }
+
+                    <a asp-action="Index" class="btn btn-light mt-3">
+                        Back to all donations
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "FoodShare";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <span class="hero-tag">FOODSHARE COMMUNITY</span>
+
+        <h1>Good food.<br /><span>Greater good.</span></h1>
+
+        <p>
+            Connect surplus food with people who need it.
+            Every donation can make a meaningful difference.
+        </p>
+
+        <div class="hero-actions">
+            <a asp-controller="Home" asp-action="Privacy"
+               class="btn-primary-custom">Get Started</a>
+
+            <a href="#how-it-works" class="btn-secondary-custom">
+                How it works
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <h3>Share</h3>
+                <p>Surplus food</p>
+            </div>
+            <div>
+                <h3>Connect</h3>
+                <p>Local communities</p>
+            </div>
+            <div>
+                <h3>Reduce</h3>
+                <p>Food waste</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="food-card">
+            <div class="food-icon">🥗</div>
+            <span class="available-label">COMMUNITY DONATION</span>
+            <h3>Fresh food, shared with care.</h3>
+            <p>Good food deserves a good destination.</p>
+            <div class="food-card-footer">
+                <span>Food donation</span>
+                <span class="status-dot">● Available</span>
+            </div>
+        </div>
+        <div class="decor decor-one"></div>
+        <div class="decor decor-two"></div>
+    </div>
+</section>
+
+<section id="how-it-works" class="how-section">
+    <div class="section-heading">
+        <span>HOW IT WORKS</span>
+        <h2>Small actions. Real impact.</h2>
+        <p>A simple way to make surplus food useful.</p>
+    </div>
+
+    <div class="feature-grid">
+        <article class="feature-card">
+            <div class="feature-number">01</div>
+            <h3>Donate food</h3>
+            <p>List surplus food and share its quantity and pickup details.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-number">02</div>
+            <h3>Find donations</h3>
+            <p>Browse available food donations in your community.</p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-number">03</div>
+            <h3>Arrange pickup</h3>
+            <p>Coordinate collection and update the donation status.</p>
+        </article>
+    </div>
+</section>

@@ -1,0 +1,151 @@
+
+@model IEnumerable<FoodShare.Models.Donation>
+
+@{
+    ViewData["Title"] = "Available Donations";
+}
+
+<div class="container py-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <span class="text-success fw-bold">FOODSHARE COMMUNITY</span>
+            <h1 class="fw-bold mt-2">Available Donations</h1>
+          
+            <p class="text-muted">Discover surplus food shared by your community.</p>
+        </div>
+
+<form asp-action="Index" method="get" class="card border-0 shadow-sm rounded-4 p-3 mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-6">
+            <label for="search" class="form-label">Search food or location</label>
+            <input type="text" id="search" name="search"
+                   value="@ViewBag.Search"
+                   class="form-control"
+                   placeholder="e.g. meals or Surat" />
+        </div>
+    
+        <div class="col-md-4">
+            <label for="foodType" class="form-label">Food type</label>
+            
+<div class="col-md-4">
+    <label for="status" class="form-label">Donation status</label>
+    <select id="status" name="status" class="form-select">
+        <option value="">All statuses</option>
+        @foreach (var item in new[] { "Available", "Claimed", "Completed" })
+        {
+            if ((string?)ViewBag.Status == item)
+            {
+                <option value="@item" selected>@item</option>
+            }
+            else
+            {
+                <option value="@item">@item</option>
+            }
+        }
+    </select>
+</div>
+
+            <select id="foodType" name="foodType" class="form-select">
+                <option value="">All food types</option>
+                @foreach (var type in new[] {
+                    "Cooked Meals", "Fruits", "Vegetables",
+                    "Bakery", "Packaged Food", "Other"
+                })
+                {
+                    if ((string?)ViewBag.FoodType == type)
+                    {
+                        <option value="@type" selected>@type</option>
+                    }
+                    else
+                    {
+                        <option value="@type">@type</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <a asp-action="Index" class="small text-success">Clear filters</a>
+    </div>
+</form>
+
+        <a asp-action="Create" class="btn btn-success btn-lg">
+            + Donate Food
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5 border rounded-4">
+            <div class="display-3">🥗</div>
+            <h3 class="mt-3">No donations yet</h3>
+            <p class="text-muted">Be the first to share surplus food.</p>
+            <a asp-action="Create" class="btn btn-success">
+                Add First Donation
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var donation in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+                                <span class="badge bg-success-subtle text-success">
+                                    @donation.FoodType
+                                </span>
+                                <span class="small text-muted">
+                                    @donation.Status
+                                </span>
+                            </div>
+
+                            <h4 class="fw-bold">@donation.Title</h4>
+                            <p class="text-muted">
+                                @(string.IsNullOrWhiteSpace(donation.Description)
+                                    ? "Food shared with care."
+                                    : donation.Description)
+                            </p>
+
+                            <hr />
+
+                            <p class="mb-2">
+                                <strong>Quantity:</strong> @donation.Quantity
+                            </p>
+                            <p class="mb-2">
+                                <strong>Pickup:</strong> @donation.PickupLocation
+                            </p>
+                            <p class="mb-2">
+                                <strong>Donor:</strong> @donation.DonorName
+                            </p>
+                            <p class="small text-muted mb-3">
+                                <strong>Deadline:</strong>
+                                @donation.PickupDeadline.ToString("dd MMM yyyy, hh:mm tt")
+                            </p>
+
+                            <a asp-action="Details" asp-route-id="@donation.Id"
+                               class="btn btn-outline-success w-100">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
